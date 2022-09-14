@@ -1,0 +1,24 @@
+{
+  "name": "curso-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LanziniAgustina/Curso-Node.git"
+  },
+  "author": "Agustina Lanzini",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LanziniAgustina/Curso-Node/issues"
+  },
+  "homepage": "https://github.com/LanziniAgustina/Curso-Node#readme",
+  "dependencies": {
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1"
+  }
+}
