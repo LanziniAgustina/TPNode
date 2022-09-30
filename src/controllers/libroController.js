@@ -3,7 +3,13 @@ module.exports = {
     getLibro: async (req,res,next) => {
         try {
             const book = await models.libro.findOne({
-                where: { cod: req.params.cod}
+                where: { cod: req.params.cod},
+                include: [{
+                    model: models.usuario_libro,
+                    include: [{
+                        model: models.usuario
+                    }]
+                }]
             })
             res.json({
                 success: true,

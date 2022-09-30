@@ -6,7 +6,13 @@ module.exports = {
     getUsuario: async (req,res, next) => {
         try {
             const user = await models.usuario.findOne({
-                where: { id: req.params.id}
+                where: { id: req.params.id},
+                include: [{
+                    model: models.usuario_libro,
+                    include: [{
+                        model: models.libro
+                    }]
+                }]
             })
             if (!user){
                 return next(errorMsg.UsuarioInexistente)
@@ -43,6 +49,12 @@ module.exports = {
     crearUsuario: async (req,res,next) => {
         try {
             const user = await models.usuario.create(req.body)
+
+            const relacion = await models.usuario_libro.create({
+                usuarioId: user.id,
+                libroCod: req.body.libroCod
+            })
+
             res.json({
                 success: true,
                 data: {

@@ -46,7 +46,7 @@ module.exports = (sequelize, DataTypes) => {
 
 
 Libro.associate = models => { //Acá van las tablas intermedias
-
+    Libro.hasMany(models.usuario_libro)
 }
 
 return Libro
