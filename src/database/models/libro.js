@@ -23,6 +23,9 @@ module.exports = (sequelize, DataTypes) => {
         coleccion: {
             type: DataTypes.STRING,
         },
+        autor: {
+            type: DataTypes.STRING,
+        },
         createdAt: {
             type: DataTypes.DATE,
             defaultValue: DataTypes.NOW,
@@ -34,7 +37,8 @@ module.exports = (sequelize, DataTypes) => {
         },
         deletedAt: {
             type: DataTypes.DATE,
-        }
+        },
+        
     }, {
     paranoid: true, 
     freezeTableName: true, 
