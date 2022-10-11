@@ -1,5 +1,5 @@
 'use strict' 
-
+const bcrypt = require('bcryptjs')
 module.exports = (sequelize, DataTypes) => {
     let Usuario = sequelize.define('usuario', {
         id: {
@@ -21,6 +21,11 @@ module.exports = (sequelize, DataTypes) => {
         },
         telefono: {
             type: DataTypes.BIGINT,
+        },
+        password: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            defaultValue: bcrypt.hashSync('password',10)
         },
         createdAt: { //este nombre se lo da por defecto, para renombrarlos hay que ponerle 'field' y el nombre que queremos
             type: DataTypes.DATE,

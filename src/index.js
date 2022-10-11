@@ -11,7 +11,9 @@ const init = () => {
     app.use(express.json())
     app.use(express.urlencoded({extended:true}))
 
-    //configuracion de routers
+    //config rutas de autenticacion
+    app.use('/', routerConfig.routes_auth())
+    //configuracion de router interno
     app.use('/api/', routerConfig.routes_init())
     app.use(function (req,res,next){
         next(createError(404)) //si no encuentra ruta tonce da 404
@@ -19,6 +21,7 @@ const init = () => {
     app.use(errorHandler)
     app.listen(globalConst.PORT)
     console.log("Escuchando en el port " + globalConst.PORT)
+
 }
 
 init()

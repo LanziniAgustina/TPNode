@@ -1,5 +1,6 @@
 const models = require('../database/models/index')
 const errorMsg = require('../const/errorMsg')
+const bcrypt = require('bcryptjs')
 
 module.exports = {
 
@@ -48,8 +49,26 @@ module.exports = {
 
     crearUsuario: async (req,res,next) => {
         try {
+            //si no está registrado
+            const registrado = await models.usuario.findOne({
+                where: { 
+                    email: req.body.email
+                }
+            })
+            if (registrado) {
+                return next(errorMsg.EmailRegistrado)
+            }
+
+            //encriptamos la contraseña
+            user.password = bcrypt.hashSync(user.password, 10) 
             const user = await models.usuario.create(req.body)
 
+            //si existe el libro creamos la relacion
+            const libro = await models.libro.findOne({
+                where: { cod: req.body.libroCod}
+            })
+            if (!libro)
+                return next(errorMsg.LibroInexistente)
             const relacion = await models.usuario_libro.create({
                 usuarioId: user.id,
                 libroCod: req.body.libroCod
